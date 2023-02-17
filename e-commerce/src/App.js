@@ -1,45 +1,23 @@
 import './App.css';
 import "./styles/styles_components/main.css"
-import NavBar from "./components/header/NavBar";
+import Header from './components/header/Header' 
 import Footer from './components/footer/Footer';
-import ProductCard from './components/main/ProductCard';
-import Img2 from "./components/img/Img2.png"
-import Img1 from "./components/img/Img1.jpg"
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { ProductCardListContainer } from './components/main/mainComponents/cards/ProductCardListConteiner';
 
 function App() {
+ 
   return (
     <div>
-   <NavBar/>
-   <Footer/>
-   <div>
-      <h1 className='title'>Productos Recomendados</h1>
+   <Header/>
+       <Routes>
+          <Route path ="/" element={<ProductCardListContainer/>} />
+          <Route path="/category/:id" element={<ProductCardListContainer />}/>
+          <Route path="/item/:id" element={<ProductCardListContainer />}/>
+        </Routes>
+        <Footer/>
     </div>
-    <div className='flex-container'>
-       <ProductCard
-          title="Body Chain"
-          img={Img2}
-          price={2000}
-        />
-             <ProductCard
-          title="Body Chain"
-          img={Img2}
-          price={2000}
-        />
-             <ProductCard
-          title="Body Chain"
-          img={Img2}
-          price={2000}
-        />
-             <ProductCard
-          title="Body Chain"
-          img={Img2}
-          price={2000}
-        />
-
-    </div>
-  </div>
-    
   );
 }
 

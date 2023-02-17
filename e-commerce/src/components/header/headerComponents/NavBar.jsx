@@ -1,17 +1,17 @@
-import Logo from "../img/Logo.svg";
-import "../../styles/styles_components/NavBar.css"
-import ShoppingCart from "../img/ShoppingCart.svg"
+import "../../../styles/styles_components/NavBar.css"
+import CardWidget from "./CartWidget";
+import Logo from "../../img/Logo.svg"
 
 
 function NavBar() {
     return (
       <nav className="headerbackground">
         <ul className="ul">
-          
-            <a href="/">
-              <img className="imgLogo" src={Logo} alt="avocado"  />
-            </a>
-          
+        <div>
+        <a href="/">
+        <img className="imgLogo" src={Logo} alt="avocado"  />
+      </a>
+      </div>
           <li>
            <button className="lengerie">Lenceria</button>
           </li>
@@ -24,7 +24,7 @@ function NavBar() {
           <li>
            <button className="contact">Contacto</button>
           </li>
-        <img className="icon-cart" src={ShoppingCart} alt="shoppingCart"  />
+        <CardWidget/>
         </ul>
       </nav>
     );
