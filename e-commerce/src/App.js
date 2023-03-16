@@ -5,6 +5,8 @@ import Footer from './components/footer/Footer';
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ProductCardListContainer } from './components/main/mainComponents/cards/ProductCardListConteiner';
+import Main from './components/main/Main'
+
 
 function App() {
  
@@ -12,7 +14,7 @@ function App() {
     <div>
    <Header/>
        <Routes>
-          <Route path ="/" element={<ProductCardListContainer/>} />
+          <Route path ="/" element={<Main/>} />
           <Route path="/category/:id" element={<ProductCardListContainer />}/>
           <Route path="/item/:id" element={<ProductCardListContainer />}/>
         </Routes>

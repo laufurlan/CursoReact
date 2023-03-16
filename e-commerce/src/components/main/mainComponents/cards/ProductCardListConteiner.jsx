@@ -1,42 +1,39 @@
 import { useEffect, useState } from "react"
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import { useParams } from "react-router-dom"
-import { pFetch } from "../../../../utils/pFetch"
 import ProductCardList from "./ProductCardList"
+import { Loading } from "../../Loading"
 
-
-
-
-export const ProductCardListContainer = ( {saludos}) => {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading ] = useState(true)
-    const { idCategory } = useParams()
+export const ProductCardListContainer = () => {
+    const [products, setProducts] = useState([])   
+    const [loading, setLoading ] = useState(true)      
+    const { category } = useParams()    
      
+
     useEffect(()=>{
-        if (idCategory) {
-            pFetch()
-            .then(resp => setProducts(resp.filter(products=> products.category === idCategory)))
-            .catch( err => console.log(err))
-            .finally( ()=> setLoading(false))            
-            
-        } else {
-            pFetch()
-            .then(resp => setProducts(resp))
-            .catch( err => console.log(err))
-            .finally( ()=> setLoading(false))            
-        }
+        const db = getFirestore()        
+        const queryCollection = collection(db, 'products')
         
-    }, [idCategory])
-    
+        const queryFilter = category ? query(queryCollection, where( 'category', '==' , category)) : queryCollection                
+
+        getDocs(queryFilter)
+        .then(respCollection => setProducts( respCollection.docs.map(prod => ({ id: prod.id, ...prod.data() })) ))
+        .catch(err => console.error(err))
+        .finally(()=> setLoading(false))         
+    }, [category])
+         
     return (
         <>
-            { loading ? 
-                    <h2>Cargando ...</h2>
-                : 
-                    <>
-                        <h2>{saludos}</h2>
-                        <ProductCardList products={products}/>
-                    </>
+         
+            { loading ?                    
+                <Loading />
+            : 
+                <>                        
+                    <ProductCardList products={products}/>
+                </>
             }
         </>
     )
 }
+
+
