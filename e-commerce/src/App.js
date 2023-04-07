@@ -6,12 +6,14 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ProductCardListContainer } from './components/main/mainComponents/cards/ProductCardListConteiner';
 import Main from './components/main/Main'
+import {CartContextProvider} from './context/CartContext'
 
 
 function App() {
  
   return (
     <div>
+   <CartContextProvider> 
    <Header/>
        <Routes>
           <Route path ="/" element={<Main/>} />
@@ -19,6 +21,7 @@ function App() {
           <Route path="/item/:id" element={<ProductCardListContainer />}/>
         </Routes>
         <Footer/>
+        </CartContextProvider>       
     </div>
   );
 }

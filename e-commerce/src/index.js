@@ -4,7 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
+import { initFirebase } from './firebase/Config'
 
+
+
+initFirebase()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
@@ -14,6 +18,8 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+
 <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
